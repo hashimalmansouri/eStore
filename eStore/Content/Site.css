@@ -1,0 +1,12 @@
+﻿@font-face {
+    font-family: "Droid Arabic Kufi";
+    src: url(../fonts/DroidKufi-Regular.ttf);
+}
+
+body {
+    font-family: "Droid Arabic Kufi", "WYekan";
+}
+
+.body-content{
+    padding-top:30px;
+}

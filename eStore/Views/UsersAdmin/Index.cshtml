@@ -1,0 +1,117 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@model IEnumerable<eStore.Models.UsersViewModel>
+
+@{
+    ViewBag.Title = "المستخدمون";
+    var c = 0;
+    var status = Convert.ToByte(TempData["Status"]);
+}
+
+@{
+    if (status == 1)
+    {
+        <div class="alert alert-success">
+            <span><strong>@TempData["Message"].ToString()</strong></span>
+        </div>
+    }
+    else if (status == 2)
+    {
+        <div class="alert alert-danger">
+            <span><strong>@TempData["Message"].ToString()</strong></span>
+        </div>
+    }
+}
+
+<h2>@ViewBag.Title</h2>
+<hr />
+<p>
+    <a href="@Url.Action("Create")" class="btn btn-success"><span class="glyphicon glyphicon-user"></span> إضافة مستخدم جديد</a>
+</p>
+
+<table class="table table-bordered table-hover table-responsive-sm text-center">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.UserType)
+            </th>
+            <th class="text-center">
+                الأوامر
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            if (Model.Any())
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@{ c++; } @c</td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.UserType)
+                        </td>
+                        <td>
+                            <a href="@Url.Action("Edit",new { id = item.Id })" class="btn btn-warning"> تعديل </a>
+                            @{
+                                if (item.IsActive)
+                                {
+                                    using (Html.BeginForm("ChangeStatus", "UsersAdmin", FormMethod.Post, new { @class = "form-inline" }))
+                                    {
+                                        @Html.Hidden("id", item.Id)
+                                        <button type="submit" class="btn btn-danger">إيقاف</button>
+                                    }
+                                }
+                                else
+                                {
+                                    using (Html.BeginForm("ChangeStatus", "UsersAdmin", FormMethod.Post, new { @class = "form-inline" }))
+                                    {
+                                        @Html.Hidden("id", item.Id)
+                                        <button type="submit" class="btn btn-success">تفعيل</button>
+                                    }
+                                }
+                            }
+                            <a href="@Url.Action("ResetPassword", "Account", new { Id = item.Id, Area = "" })" class="btn btn-info"> تهيئة كلمة المرور</a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="5">لاتوجد بيانات</td>
+                </tr>
+            }
+        }
+    </tbody>
+
+</table>
+
+<div class="row">
+    <div class="col-md-12">
+        @if (((IPagedList)Model).PageCount > 0)
+        {
+            <div class="center_items">
+                @{ var x = ((IPagedList)Model);}
+                الصفحة @x.PageNumber من @x.PageCount
+
+                @Html.PagedListPager((IPagedList)Model, pageNo => Url.Action("Index", "UsersAdmin",
+                    new { pageNo, search = Request.QueryString["search"], role = Request.QueryString["role"] }),
+                    PagedListRenderOptions.OnlyShowFivePagesAtATime)
+            </div>
+        }
+    </div>
+</div>
