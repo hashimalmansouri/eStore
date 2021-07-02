@@ -11,7 +11,7 @@ namespace eStore.Models
         public bool IsActive { get; set; }
         [Display(Name = "صلاحية الحساب")]
         public string UserType { get; set; }
-        [Display(Name = "الإيميل")]
+        [Display(Name = "البريد الإلكتروني")]
         public string Email { get; set; }
         [Display(Name = "اسم المستخدم")]
         public string UserName { get; set; }

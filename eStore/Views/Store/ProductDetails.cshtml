@@ -1,0 +1,55 @@
+﻿@model eStore.Models.Product
+@{
+    ViewBag.Title = "Product - " + Model.ProductName;
+    var imgIndex = 0;
+}
+
+<link href="~/Content/lightbox.css" rel="stylesheet" />
+
+<div class="row">
+    <div class="col-md-4">
+        <center>
+            <img src="~/Content/Images/Products/@Model.Attachments.First().FileName" class="product-main-image img-fluid" alt="" data-toggle="modal" data-target="#lightbox-modal" data-img-index="0">
+        </center>
+        <div class="row">
+            <div class="col-md-12 product-image-container">
+                @foreach (var image in Model.Attachments)
+                {
+                    <div class="product-image-thumbnail-container">
+                        <a href="~/Content/Images/Products/@image.FileName" data-lightbox="imgs">
+                            <img src="~/Content/Images/Products/@image.FileName" class="product-image-thumbnail" alt="" />
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <h4>@Model.ProductName</h4>
+        <h6><a href="javascript:void(0)">@Model.Brand.BrandName</a></h6>
+        <h6>
+            $@Model.Price
+        </h6>
+        <a href="@Url.Action("AddToCart", "ShoppingCart", new {id = Model.ProductId})" class="btn btn-primary btn-sm">
+            أضف إلى السلة
+        </a>
+    </div>
+</div>
+
+
+<div class="bd-example">
+    <nav>
+        <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
+            <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">الوصــف</button>
+        </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade active show" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+            @Model.Description
+        </div>
+    </div>
+</div>
+
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/lightbox.js"></script>

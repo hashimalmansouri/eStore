@@ -1,29 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using eStore.Models;
+using PagedList;
+using System;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using System.Data;
+using System.Data.Entity;
 
 namespace eStore.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        ApplicationDbContext db = new ApplicationDbContext();
+        public ActionResult Index(string search, int? pageNo)
         {
-            return View();
+            var products = db.Products.Include(p => p.Brand).Include(p => p.Genre).Include(p => p.Attachments);
+            if (!String.IsNullOrEmpty(search))
+            {
+                products = products.Where(p => p.ProductName.Contains(search) ||
+                                          p.Brand.BrandName.Contains(search) ||
+                                          p.Genre.GenreName.Contains(search));
+            }
+            products = products.OrderBy(p => p.ProductId);
+            return View(products.ToPagedList(pageNo ?? 1, 6));
         }
 
-        public ActionResult About()
+        public ActionResult Contact(int? id)
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
+            if (id != null)
+                ViewBag.Message = "تم الإرسال بنجاح.";
             return View();
         }
     }

@@ -20,9 +20,6 @@ namespace eStore.Models
         [Display(Name = "السعر")]
         [Range(0, 5000)]
         public decimal Price { get; set; }
-        //[Required(ErrorMessage = "Image is required")]
-        [Display(Name = "الصورة")]
-        public string ImageUrl { get; set; }
         [Required(ErrorMessage = "{0} حقل مطلوب.")]
         [Display(Name = "الوصف")]
         [AllowHtml]
@@ -44,5 +41,6 @@ namespace eStore.Models
         public virtual Brand Brand { get; set; }
         public virtual Genre Genre { get; set; }
         public ICollection<Cart> Carts { get; set; }
+        public ICollection<Attachment> Attachments { get; set; }
     }
 }

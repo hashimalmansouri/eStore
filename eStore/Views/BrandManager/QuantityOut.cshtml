@@ -1,0 +1,14 @@
+﻿<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/bootstrap-4.4.1.min.js"></script>
+<script src="~/Scripts/bootbox.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        bootbox.alert("الكمية نفذت !",
+            function() {
+                var url = $("#RedirectTo").val();
+                location.href = url;
+            });
+    });
+</script>
+@Html.Hidden("RedirectTo", Url.Action("Index", "Home"));

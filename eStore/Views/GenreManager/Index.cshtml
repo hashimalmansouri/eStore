@@ -1,0 +1,46 @@
+﻿@model IEnumerable<eStore.Models.Genre>
+@using PagedList
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "الأصناف";
+}
+<h2>@ViewBag.Title</h2>
+<hr />
+<p>
+    @Html.ActionLink("إضافة صنف جديد", "Create", null, htmlAttributes: new { @class = "btn btn-success" })
+</p>
+@if (Model.Count() == 0)
+{
+    <div class="alert alert-info" role="alert">
+        لاتوجد بيانات
+    </div>
+}
+else
+{
+    <table class="table table-bordered table-hover table-responsive d-sm-table text-center">
+        <tr>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.SingleOrDefault().GenreName)
+            </th>
+            <th class="text-center">الأوامر</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GenreName)
+                </td>
+                <td>
+                    @Html.ActionLink("تعديل", "Edit", new { id = item.GenreId }, new { @class = "btn btn-success" }) |
+                    @Html.ActionLink("تفاصيل", "Details", new { id = item.GenreId }, new { @class = "btn btn-info" }) |
+                    @Html.ActionLink("حذف", "Delete", new { id = item.GenreId }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+
+@Html.PagedListPager((IPagedList)Model, PageNo => Url.Action(("Index"),
+                 new { PageNo }), PagedListRenderOptions.OnlyShowFivePagesAtATime)

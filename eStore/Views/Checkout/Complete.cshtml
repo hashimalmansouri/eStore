@@ -1,0 +1,13 @@
+﻿@model int
+@{
+    ViewBag.Title = "إتمام الشراء";
+}
+<div class="alert alert-success marg_butt marg_top" role="alert">
+    <h4 class="alert-heading">@ViewBag.Title!</h4>
+    <p>شكراً على طلبك! رقم الطلب هو : @Model</p>
+    <hr>
+    <h3 class="mb-0">
+        يمكنك التسوق مرة أخرى وشراء المزيد من المنتجات عبر
+        @Html.ActionLink("موقعنا", "Index", "Home")
+    </h3>
+</div>

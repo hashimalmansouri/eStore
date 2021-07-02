@@ -174,8 +174,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BrandManagerController.cs" />
+    <Compile Include="Controllers\CheckoutController.cs" />
+    <Compile Include="Controllers\GenreManagerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProductManagerController.cs" />
+    <Compile Include="Controllers\ShoppingCartController.cs" />
+    <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -184,7 +190,12 @@
     <Compile Include="Migrations\202107020630506_CreateIdentityAndTBs.Designer.cs">
       <DependentUpon>202107020630506_CreateIdentityAndTBs.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202107021322258_CreateAttachments.cs" />
+    <Compile Include="Migrations\202107021322258_CreateAttachments.Designer.cs">
+      <DependentUpon>202107021322258_CreateAttachments.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Attachment.cs" />
     <Compile Include="Models\Brand.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\Genre.cs" />
@@ -217,6 +228,14 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\Images\a.jpg" />
+    <Content Include="Content\Images\b.jpg" />
+    <Content Include="Content\Images\c.jpg" />
+    <Content Include="Content\Images\close.png" />
+    <Content Include="Content\Images\loading.gif" />
+    <Content Include="Content\Images\next.png" />
+    <Content Include="Content\Images\prev.png" />
+    <Content Include="Content\lightbox.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -269,6 +288,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\lightbox.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -301,9 +321,34 @@
     <Content Include="Views\UsersAdmin\Create.cshtml" />
     <Content Include="Views\UsersAdmin\Edit.cshtml" />
     <Content Include="Views\UsersAdmin\Index.cshtml" />
+    <Content Include="Views\BrandManager\Create.cshtml" />
+    <Content Include="Views\BrandManager\Delete.cshtml" />
+    <Content Include="Views\BrandManager\Details.cshtml" />
+    <Content Include="Views\BrandManager\Edit.cshtml" />
+    <Content Include="Views\BrandManager\Index.cshtml" />
+    <Content Include="Views\BrandManager\QuantityOut.cshtml" />
+    <Content Include="Views\Checkout\AddressAndPayment.cshtml" />
+    <Content Include="Views\Checkout\Complete.cshtml" />
+    <Content Include="Views\GenreManager\Create.cshtml" />
+    <Content Include="Views\GenreManager\Delete.cshtml" />
+    <Content Include="Views\GenreManager\Details.cshtml" />
+    <Content Include="Views\GenreManager\Edit.cshtml" />
+    <Content Include="Views\GenreManager\Index.cshtml" />
+    <Content Include="Views\ProductManager\Create.cshtml" />
+    <Content Include="Views\ProductManager\Delete.cshtml" />
+    <Content Include="Views\ProductManager\Details.cshtml" />
+    <Content Include="Views\ProductManager\Edit.cshtml" />
+    <Content Include="Views\ProductManager\Index.cshtml" />
+    <Content Include="Views\ShoppingCart\CartSummary.cshtml" />
+    <Content Include="Views\ShoppingCart\Index.cshtml" />
+    <Content Include="Views\Store\BrandsMenu.cshtml" />
+    <Content Include="Views\Store\GenresMenu.cshtml" />
+    <Content Include="Views\Store\Index.cshtml" />
+    <Content Include="Views\Store\ProductDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Images\Products\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -317,6 +362,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202107020630506_CreateIdentityAndTBs.resx">
       <DependentUpon>202107020630506_CreateIdentityAndTBs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107021322258_CreateAttachments.resx">
+      <DependentUpon>202107021322258_CreateAttachments.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

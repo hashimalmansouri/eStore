@@ -1,0 +1,81 @@
+﻿@model IEnumerable<eStore.Models.Product>
+@using PagedList.Mvc;
+@using PagedList;
+@{
+    ViewBag.Title = "المنتجات";
+}
+
+<h2>@ViewBag.Title</h2>
+<hr />
+<p>
+    @Html.ActionLink("إضافة منتج جديد", "Create", null, htmlAttributes: new { @class = "btn btn-success" })
+</p>
+@if (Model.Count() == 0)
+{
+    <div class="alert alert-info" role="alert">
+        لاتوجد منتجات
+    </div>
+}
+else
+{
+    <table class="table table-bordered table-hover table-responsive d-sm-table text-center" @*id="product-table"*@>
+        <tr>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.SingleOrDefault().Brand.BrandName)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.SingleOrDefault().Genre.GenreName)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.SingleOrDefault().ProductName)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.SingleOrDefault().Price)
+            </th>
+            <th class="text-center">
+                الصورة
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.SingleOrDefault().Description)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.SingleOrDefault().Quantity)
+            </th>
+            <th class="text-center"></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Brand.BrandName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Genre.GenreName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    <img src="~/Content/Images/Products/@Html.DisplayFor(modelItem => item.Attachments.First().FileName)" class="thumbnail" style="width:100px; height:75px" />
+                </td>
+                <td>
+                    @Html.Raw(HttpUtility.HtmlDecode(Html.DisplayFor(modelItem => item.Description).ToString()))
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.ActionLink("تعديل", "Edit", new { id = item.ProductId }, new { @class = "btn btn-success" }) |
+                    @Html.ActionLink("تفاصيل", "Details", new { id = item.ProductId }, new { @class = "btn btn-info" }) |
+                    @Html.ActionLink("حذف", "Delete", new { id = item.ProductId }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </table>
+}
+@Html.PagedListPager((IPagedList)Model, PageNo => Url.Action(("Index"),
+                 new { PageNo }), PagedListRenderOptions.OnlyShowFivePagesAtATime)

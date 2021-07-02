@@ -84,7 +84,7 @@
                                     }
                                 }
                             }
-                            <a href="@Url.Action("ResetPassword", "Account", new { Id = item.Id, Area = "" })" class="btn btn-info"> تهيئة كلمة المرور</a>
+                            @*<a href="@Url.Action("ResetPassword", "Account", new { Id = item.Id, Area = "" })" class="btn btn-info"> تهيئة كلمة المرور</a>*@
                         </td>
                     </tr>
                 }
@@ -100,18 +100,7 @@
 
 </table>
 
-<div class="row">
-    <div class="col-md-12">
-        @if (((IPagedList)Model).PageCount > 0)
-        {
-            <div class="center_items">
-                @{ var x = ((IPagedList)Model);}
-                الصفحة @x.PageNumber من @x.PageCount
-
-                @Html.PagedListPager((IPagedList)Model, pageNo => Url.Action("Index", "UsersAdmin",
-                    new { pageNo, search = Request.QueryString["search"], role = Request.QueryString["role"] }),
-                    PagedListRenderOptions.OnlyShowFivePagesAtATime)
-            </div>
-        }
-    </div>
-</div>
+<span class="text-center">
+    @Html.PagedListPager((IPagedList)Model, pageNo => Url.Action("Index", "UsersAdmin",
+                    new { pageNo }), PagedListRenderOptions.OnlyShowFivePagesAtATime)
+</span>

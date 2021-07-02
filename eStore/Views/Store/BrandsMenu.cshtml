@@ -1,0 +1,14 @@
+﻿@model IEnumerable<eStore.Models.Brand>
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="dropdown09" data-bs-toggle="dropdown" aria-expanded="false">كل الماركات</a>
+    <ul class="dropdown-menu" aria-labelledby="dropdown09">
+        @foreach (var item in Model)
+        {
+            <li>
+                <a class="dropdown-item" href="@Url.Action("Index", "Store", new {brandId = item.BrandId})">
+                    @Html.DisplayFor(modelItem => item.BrandName)
+                </a>
+            </li>
+        }
+    </ul>
+</li>

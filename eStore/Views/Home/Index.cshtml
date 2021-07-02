@@ -1,5 +1,97 @@
-﻿@{
+﻿@model IEnumerable<eStore.Models.Product>
+@using PagedList.Mvc
+@using PagedList
+@{
     ViewBag.Title = "الصفحة الرئيسية";
 }
 
-<h1>الصفحة الرئيسية</h1>
+<!-- Home -->
+
+<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2" class="active" aria-current="true"></button>
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3" class=""></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="~/Content/Images/a.jpg" width="1116" height="400" />
+        </div>
+        <div class="carousel-item">
+            <img src="~/Content/Images/b.jpg" width="1116" height="400" />
+        </div>
+        <div class="carousel-item">
+            <img src="~/Content/Images/c.jpg" width="1116" height="400" />
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">السابق</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">التالي</span>
+    </button>
+</div>
+
+<div style="width: auto; height: 100px; background: #4a4a4a; padding-top: 25px;">
+    <div class="text-center" style="font-size: 30px; color: white;">
+        المنتجات المميزة
+    </div>
+</div>
+<!-- Search Area-->
+@using (Html.BeginForm("Index", "Home", FormMethod.Get))
+{
+    <div class="input-group search">
+        <input type="text" name="search" class="form-control" placeholder="ابحث عن منتج، صنف أو ماركة ..." />
+        <button type="submit" class="btn btn-primary col-1">
+            بحث
+        </button>
+    </div>
+}
+
+@if (Model.Count() == 0)
+{
+    <div class="alert alert-info" role="alert">
+        لاتوجد منتجات لعرضها.
+    </div>
+}
+else
+{
+    <div class="row mt-3">
+        @foreach (var product in Model)
+        {
+            <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                <div class="card">
+                    <center>
+                        <a href="@Url.Action("ProductDetails", "Store", new { id = product.ProductId })">
+                            <img class="img-fluid" src="~/Content/Images/Products/@product.Attachments.FirstOrDefault().FileName" width="160" height="170" alt="@product.ProductName">
+                        </a>
+                    </center>
+                    <div class="card-block">
+                        <a href="@Url.Action("ProductDetails", "Store", new { id = product.ProductId })" class="card-title text-muted" title="">@product.ProductName</a>
+                        <div class="card-text">
+                            $@product.Price
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="@Url.Action("AddToCart", "ShoppingCart", new {id = product.ProductId})" class="btn btn-primary btn-sm">
+                            أضف إلى السلة
+                        </a>
+                        <span style="padding-right:35px">الكمية : @product.Quantity</span>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+
+@if (((IPagedList)Model).PageCount > 0)
+{
+    <span>
+        @Html.PagedListPager((IPagedList)Model, PageNo => Url.Action(("Index"),
+                 new { PageNo, search = Request.QueryString["search"] }),
+                 PagedListRenderOptions.OnlyShowFivePagesAtATime)
+    </span>
+}

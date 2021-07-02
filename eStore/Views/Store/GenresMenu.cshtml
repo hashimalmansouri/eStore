@@ -1,0 +1,14 @@
+﻿@model IEnumerable<eStore.Models.Genre>
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="dropdown09" data-bs-toggle="dropdown" aria-expanded="false">كل الأصناف</a>
+    <ul class="dropdown-menu" aria-labelledby="dropdown09">
+        @foreach (var item in Model)
+        {
+            <li>
+                <a class="dropdown-item" href="@Url.Action("Index", "Store", new {genreId = item.GenreId})">
+                    @Html.DisplayFor(modelItem => item.GenreName)
+                </a>
+            </li>
+        }
+    </ul>
+</li>

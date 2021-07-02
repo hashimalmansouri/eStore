@@ -1,0 +1,90 @@
+﻿@model eStore.Models.Product
+
+@{
+    ViewBag.Title = "حذف منتج";
+}
+
+<h2>@ViewBag.Title</h2>
+<hr />
+
+<h3>هل أنت متأكد من حذف هذا المنتج؟</h3>
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Brand.BrandName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Brand.BrandName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Genre.GenreName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Genre.GenreName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.Raw(HttpUtility.HtmlDecode(Html.DisplayFor(model => model.Description).ToString()))
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        <dt>
+            الصور
+        </dt>
+
+        <dd>
+            <div class="row">
+                @if (Model.Attachments.Count > 0)
+                {
+                    foreach (var image in Model.Attachments)
+                    {
+                        <div class="col-sm-3">
+                            <img src="~/Content/Images/Products/@Html.DisplayFor(model => image.FileName)" class="thumbnail" style="width:160px; height:170px" />
+                        </div>
+                    }
+                }
+            </div>
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color marg_butt">
+            <input type="submit" value="حذف" class="btn btn-danger" /> |
+            @Html.ActionLink("العودة إلى القائمة", "Index", null, new { @class = "btn btn-outline-dark" })
+        </div>
+    }
+</div>

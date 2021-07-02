@@ -233,7 +233,8 @@ namespace eStore.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
-            MigrateShoppingCart(User.Identity.Name);
+            var cart = ShoppingCart.GetCart(this.HttpContext);
+            cart.EmptyCart();
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
         }

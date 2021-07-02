@@ -8,5 +8,36 @@ body {
 }
 
 .body-content{
-    padding-top:30px;
+    padding-top:20px;
+}
+
+.search {
+    padding-top: 10px;
+}
+
+.product-image-thumbnail-container {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    margin: 5px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.product-image-thumbnail {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.product-main-image {
+    width: auto;
+    height: auto;
+    max-width: 256px;
+    max-height: 256px;
+    cursor: pointer;
 }

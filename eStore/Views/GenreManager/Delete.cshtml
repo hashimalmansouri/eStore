@@ -1,0 +1,30 @@
+﻿@model eStore.Models.Genre
+
+@{
+    ViewBag.Title = "حذف صنف";
+}
+
+<h2>@ViewBag.Title</h2>
+<hr />
+<h3>هل أنت متأكد من حذف هذا الصنف؟</h3>
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.GenreName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GenreName)
+        </dd>
+
+    </dl>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color marg_butt">
+            <input type="submit" value="حذف" class="btn btn-danger" /> |
+            @Html.ActionLink("العودة إلى القائمة", "Index", null, new { @class = "btn btn-dark" })
+        </div>
+    }
+</div>

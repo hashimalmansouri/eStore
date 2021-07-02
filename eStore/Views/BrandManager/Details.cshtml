@@ -1,0 +1,25 @@
+﻿@model eStore.Models.Brand
+
+@{
+    ViewBag.Title = "تفاصيل الماركة";
+}
+
+<h2>@ViewBag.Title</h2>
+<hr />
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BrandName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BrandName)
+        </dd>
+
+    </dl>
+</div>
+<p class="marg_butt">
+    @Html.ActionLink("تعديل", "Edit", new { id = Model.BrandId }, new { @class = "btn btn-success" }) |
+    @Html.ActionLink("العودة إلى القائمة", "Index", null, new { @class = "btn btn-dark" })
+</p>

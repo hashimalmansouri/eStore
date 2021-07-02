@@ -1,0 +1,72 @@
+﻿@model IEnumerable<eStore.Models.Product>
+@using PagedList
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "كل المنتجات";
+}
+
+<div style="width:auto;height:100px;background:#4a4a4a;padding-top:25px;">
+    <div class="text-center" style="font-size:30px;color:white;">
+        @if (ViewBag.Name != null)
+        {
+            <text>كل المنتجات من </text> @ViewBag.Name
+        }
+        else
+        {
+            <text>كل المنتجات</text>
+        }
+    </div>
+</div>
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Get))
+{
+    <div class="input-group search">
+        <input type="text" name="search" class="form-control" placeholder="ابحث عن منتج، صنف أو ماركة ..." />
+        <button type="submit" class="btn btn-primary col-1">
+            بحث
+        </button>
+    </div>
+}
+
+@if (Model.Count() == 0)
+{
+    <div class="alert alert-info" role="alert">
+        لاتوجد منتجات لعرضها.
+    </div>
+}
+else
+{
+    <div class="row mt-3">
+        @foreach (var product in Model)
+        {
+            <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                <div class="card">
+                    <center>
+                        <a href="#">
+                            <img class="img-fluid" src="~/Content/Images/Products/@product.Attachments.First().FileName" width="160" height="170" alt="@product.ProductName">
+                        </a>
+                    </center>
+                    <div class="card-block">
+                        <a href="#" class="card-title text-muted" title="">@product.ProductName</a>
+                        <div class="card-text">
+                            $@product.Price
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="@Url.Action("AddToCart", "ShoppingCart", new {id = product.ProductId})" class="btn btn-primary btn-sm">
+                            أضف إلى السلة
+                        </a>
+                        <span style="padding-right:35px">الكمية : @product.Quantity</span>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+@if (((IPagedList)Model).PageCount > 0)
+{
+    @Html.PagedListPager((IPagedList)Model, PageNo => Url.Action("Index", "Store",
+                 new { PageNo, search = Request.QueryString["search"], brandId = ViewBag.BrandId, genreId = ViewBag.GenreId }),
+                 PagedListRenderOptions.OnlyShowFivePagesAtATime)
+}

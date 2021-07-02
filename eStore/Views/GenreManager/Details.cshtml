@@ -1,0 +1,25 @@
+﻿@model eStore.Models.Genre
+
+@{
+    ViewBag.Title = "تفاصيل الصنف";
+}
+
+<h2>@ViewBag.Title</h2>
+<hr />
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.GenreName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GenreName)
+        </dd>
+
+    </dl>
+</div>
+<p class="marg_butt">
+    @Html.ActionLink("تعديل", "Edit", new { id = Model.GenreId }, new { @class = "btn btn-success" }) |
+    @Html.ActionLink("العودة إلى القائمة", "Index", null, new { @class = "btn btn-dark" })
+</p>
