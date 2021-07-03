@@ -32,7 +32,7 @@
 <table class="table table-bordered table-hover table-responsive-sm text-center">
     <thead>
         <tr>
-            <th>#</th>
+            <th class="text-center">#</th>
             <th class="text-center">
                 @Html.DisplayNameFor(model => model.UserName)
             </th>
@@ -66,13 +66,14 @@
                         </td>
                         <td>
                             <a href="@Url.Action("Edit",new { id = item.Id })" class="btn btn-warning"> تعديل </a>
+                            <a href="@Url.Action("Delete",new { id = item.Id })" class="btn btn-danger"> حذف </a>
                             @{
                                 if (item.IsActive)
                                 {
                                     using (Html.BeginForm("ChangeStatus", "UsersAdmin", FormMethod.Post, new { @class = "form-inline" }))
                                     {
                                         @Html.Hidden("id", item.Id)
-                                        <button type="submit" class="btn btn-danger">إيقاف</button>
+                                        <button type="submit" class="btn btn-secondary">إيقاف</button>
                                     }
                                 }
                                 else

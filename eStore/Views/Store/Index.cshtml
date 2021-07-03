@@ -42,12 +42,12 @@ else
             <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3">
                 <div class="card">
                     <center>
-                        <a href="#">
-                            <img class="img-fluid" src="~/Content/Images/Products/@product.Attachments.First().FileName" width="160" height="170" alt="@product.ProductName">
+                        <a href="@Url.Action("ProductDetails", "Store", new { id = product.ProductId })">
+                            <img src="~/Content/Images/Products/@product.Attachments.First().FileName" width="160" height="170" alt="@product.ProductName">
                         </a>
                     </center>
                     <div class="card-block">
-                        <a href="#" class="card-title text-muted" title="">@product.ProductName</a>
+                        <a href="@Url.Action("ProductDetails", "Store", new { id = product.ProductId })" class="card-title text-muted" title="">@product.ProductName</a>
                         <div class="card-text">
                             $@product.Price
                         </div>

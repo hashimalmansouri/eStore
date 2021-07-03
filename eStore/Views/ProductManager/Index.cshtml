@@ -36,9 +36,6 @@ else
                 الصورة
             </th>
             <th class="text-center">
-                @Html.DisplayNameFor(model => model.SingleOrDefault().Description)
-            </th>
-            <th class="text-center">
                 @Html.DisplayNameFor(model => model.SingleOrDefault().Quantity)
             </th>
             <th class="text-center"></th>
@@ -62,9 +59,9 @@ else
                 <td>
                     <img src="~/Content/Images/Products/@Html.DisplayFor(modelItem => item.Attachments.First().FileName)" class="thumbnail" style="width:100px; height:75px" />
                 </td>
-                <td>
+                @*<td>
                     @Html.Raw(HttpUtility.HtmlDecode(Html.DisplayFor(modelItem => item.Description).ToString()))
-                </td>
+                </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.Quantity)
                 </td>

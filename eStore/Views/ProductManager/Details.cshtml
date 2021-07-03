@@ -5,61 +5,37 @@
 }
 <h2>@ViewBag.Title</h2>
 <hr />
-<div>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Brand.BrandName)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Brand.BrandName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Genre.GenreName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Genre.GenreName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ProductName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ProductName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
+<table class="table table-bordered table-hover table-responsive d-sm-table text-center">
+    <tr>
+        <th class="text-center">@Html.DisplayNameFor(model => model.Brand.BrandName)</th>
+        <td>@Html.DisplayFor(model => model.Brand.BrandName)</td>
+    </tr>
+    <tr>
+        <th class="text-center">@Html.DisplayNameFor(model => model.Genre.GenreName)</th>
+        <td>@Html.DisplayFor(model => model.Genre.GenreName)</td>
+    </tr>
+    <tr>
+        <th class="text-center">@Html.DisplayNameFor(model => model.ProductName)</th>
+        <td>@Html.DisplayFor(model => model.ProductName)</td>
+    </tr>
+    <tr>
+        <th class="text-center">@Html.DisplayNameFor(model => model.Price)</th>
+        <td>@Html.DisplayFor(model => model.Price)</td>
+    </tr>
+    <tr>
+        <th class="text-center">@Html.DisplayNameFor(model => model.Quantity)</th>
+        <td>@Html.DisplayFor(model => model.Quantity)</td>
+    </tr>
+    <tr>
+        <th class="text-center">@Html.DisplayNameFor(model => model.Description)</th>
+        <td>
             @Html.Raw(HttpUtility.HtmlDecode(Html.DisplayFor(model => model.Description).ToString()))
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Quantity)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Quantity)
-        </dd>
-
-        <dt>
-            الصور
-        </dt>
-
-        <dd>
+        </td>
+    </tr>
+    <tr>
+        <th class="text-center">الصور</th>
+        <td>
             <div class="row">
                 @if (Model.Attachments.Count > 0)
                 {
@@ -75,7 +51,7 @@
                                     {
                                         @Html.Hidden("id", Model.ProductId)
                                         @Html.Hidden("imgId", image.Id)
-                                        <button type="submit" style="margin-right:35%" class="btn btn-danger">حذف</button>
+                                        <button type="submit" class="btn btn-danger">حذف</button>
                                     }
                                 </div>
                             </div>
@@ -83,9 +59,10 @@
                     }
                 }
             </div>
-        </dd>
-    </dl>
-</div>
+        </td>
+    </tr>
+</table>
+
 <p>
     @Html.ActionLink("تعديل", "Edit", new { id = Model.ProductId }, new { @class = "btn btn-outline-success" }) |
     @Html.ActionLink("العودة إلى القائمة", "Index", null, new { @class = "btn btn-outline-dark" })

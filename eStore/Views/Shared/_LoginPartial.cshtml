@@ -8,7 +8,7 @@
 <ul class="navbar-nav mb-2 mb-lg-0">
     @{Html.RenderAction("CartSummary", "ShoppingCart");}
     <li class="nav-item">
-        @Html.ActionLink("مرحباً " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "إدارة", @class = "nav-link" })
+        @Html.ActionLink("مرحباً " + User.Identity.GetUserName() + "!", "ChangePassword", "Manage", routeValues: null, htmlAttributes: new { title = "تغيير كلمة المرور", @class = "nav-link" })
     </li>
     <li class="nav-item"><a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">تسجيل الخروج</a></li>
 </ul>

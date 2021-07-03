@@ -116,7 +116,7 @@ namespace eStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (upload != null)
+                if (upload.FirstOrDefault() != null)
                 {
                     var attachments = new List<Attachment>();
                     foreach (HttpPostedFileBase item in upload)

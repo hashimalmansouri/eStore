@@ -8,83 +8,68 @@
 <hr />
 
 <h3>هل أنت متأكد من حذف هذا المنتج؟</h3>
-<div>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Brand.BrandName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Brand.BrandName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Genre.GenreName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Genre.GenreName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ProductName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ProductName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
+<table class="table table-bordered table-hover table-responsive d-sm-table text-center">
+    <tr>
+        <th class="text-center">@Html.DisplayNameFor(model => model.Brand.BrandName)</th>
+        <td>@Html.DisplayFor(model => model.Brand.BrandName)</td>
+    </tr>
+    <tr>
+        <th class="text-center">@Html.DisplayNameFor(model => model.Genre.GenreName)</th>
+        <td>@Html.DisplayFor(model => model.Genre.GenreName)</td>
+    </tr>
+    <tr>
+        <th class="text-center">@Html.DisplayNameFor(model => model.ProductName)</th>
+        <td>@Html.DisplayFor(model => model.ProductName)</td>
+    </tr>
+    <tr>
+        <th class="text-center">@Html.DisplayNameFor(model => model.Price)</th>
+        <td>@Html.DisplayFor(model => model.Price)</td>
+    </tr>
+    <tr>
+        <th class="text-center">@Html.DisplayNameFor(model => model.Quantity)</th>
+        <td>@Html.DisplayFor(model => model.Quantity)</td>
+    </tr>
+    <tr>
+        <th class="text-center">@Html.DisplayNameFor(model => model.Description)</th>
+        <td>
             @Html.Raw(HttpUtility.HtmlDecode(Html.DisplayFor(model => model.Description).ToString()))
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Quantity)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Quantity)
-        </dd>
-
-        <dt>
-            الصور
-        </dt>
-
-        <dd>
+        </td>
+    </tr>
+    <tr>
+        <th class="text-center">الصور</th>
+        <td>
             <div class="row">
                 @if (Model.Attachments.Count > 0)
                 {
                     foreach (var image in Model.Attachments)
                     {
                         <div class="col-sm-3">
-                            <img src="~/Content/Images/Products/@Html.DisplayFor(model => image.FileName)" class="thumbnail" style="width:160px; height:170px" />
+                            <div class="card">
+                                <div class="card-body">
+                                    <img src="~/Content/Images/Products/@Html.DisplayFor(model => image.FileName)" class="thumbnail" style="width:160px; height:170px; margin-right:10%" />
+                                </div>
+                                <div class="card-footer">
+                                    @using (Html.BeginForm("DeleteImage", "ProductManager", FormMethod.Post))
+                                    {
+                                        @Html.Hidden("id", Model.ProductId)
+                                        @Html.Hidden("imgId", image.Id)
+                                        <button type="submit" class="btn btn-danger">حذف</button>
+                                    }
+                                </div>
+                            </div>
                         </div>
                     }
                 }
             </div>
-        </dd>
+        </td>
+    </tr>
+</table>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
 
-    </dl>
-
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color marg_butt">
-            <input type="submit" value="حذف" class="btn btn-danger" /> |
-            @Html.ActionLink("العودة إلى القائمة", "Index", null, new { @class = "btn btn-outline-dark" })
-        </div>
-    }
-</div>
+    <div class="form-actions no-color marg_butt">
+        <input type="submit" value="حذف" class="btn btn-danger" /> |
+        @Html.ActionLink("العودة إلى القائمة", "Index", null, new { @class = "btn btn-outline-dark" })
+    </div>
+}

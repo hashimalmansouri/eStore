@@ -19,12 +19,12 @@
 
             <div class="collapse navbar-collapse" id="navbarsExample09">
                 <ul class="navbar-nav mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        @Html.ActionLink("مشترياتي", "Index", "Purchase", new { area = "" }, new { @class = "nav-link" })
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">حولنا</a>
-                    </li>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("مستهلك"))
+                    {
+                        <li class="nav-item">
+                            @Html.ActionLink("مشترياتي", "Index", "Purchase", new { area = "" }, new { @class = "nav-link" })
+                        </li>
+                    }
                     @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                     {
                         <li class="nav-item dropdown">
@@ -49,16 +49,14 @@
         @RenderBody()
         <hr />
         <footer class="footer mt-auto py-3 bg-light">
-            <div class="container">
-                <span class="text-muted">&copy; @DateTime.Now.Year - جميع الحقوق محفوظة</span>
+            <div class="container text-center">
+                <span class="text-muted">جميع الحقوق محفوظة &copy; @DateTime.Now.Year</span>
             </div>
         </footer>
     </div>
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
-    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
-    @*@Scripts.Render("~/bundles/jquery")*@
-    @*@Scripts.Render("~/bundles/bootstrap")*@
+    @*<script src="~/Scripts/bootstrap.bundle.min.js"></script>*@
     @RenderSection("scripts", required: false)
 </body>
 </html>

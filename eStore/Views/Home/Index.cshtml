@@ -65,7 +65,7 @@ else
                 <div class="card">
                     <center>
                         <a href="@Url.Action("ProductDetails", "Store", new { id = product.ProductId })">
-                            <img class="img-fluid" src="~/Content/Images/Products/@product.Attachments.FirstOrDefault().FileName" width="160" height="170" alt="@product.ProductName">
+                            <img src="~/Content/Images/Products/@product.Attachments.FirstOrDefault().FileName" width="160" height="170" alt="@product.ProductName">
                         </a>
                     </center>
                     <div class="card-block">

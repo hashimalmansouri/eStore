@@ -164,7 +164,7 @@ namespace eStore.Controllers
                     Text = x.Name,
                     Value = x.Name
                 });
-            ViewBag.SelectedRole = rolesList;
+            ViewBag.UserType = rolesList;
             return View(new EditUserViewModel()
             {
                 Id = user.Id,
@@ -177,7 +177,7 @@ namespace eStore.Controllers
         // POST: /Users/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(EditUserViewModel editUser, params string[] selectedRole)
+        public async Task<ActionResult> Edit(EditUserViewModel editUser)
         {
             if (ModelState.IsValid)
             {
@@ -191,13 +191,13 @@ namespace eStore.Controllers
 
                     user.UserName = editUser.UserName;
                     user.Email = editUser.Email;
-                    user.UserType = editUser.SelectedRole;
+                    user.UserType = editUser.UserType;
 
                     var userRoles = await UserManager.GetRolesAsync(user.Id);
 
-                    if (editUser.SelectedRole != userRoles[0])
+                    if (editUser.UserType != userRoles[0])
                     {
-                        var result = await UserManager.AddToRolesAsync(user.Id, editUser.SelectedRole);
+                        var result = await UserManager.AddToRolesAsync(user.Id, editUser.UserType);
                         if (!result.Succeeded)
                         {
                             TempData["Message"] = "حدث خطأ غير متوقع";
@@ -214,7 +214,7 @@ namespace eStore.Controllers
                         await ctx.SaveChangesAsync();
                     }
 
-                    if (userRoles[0] != editUser.SelectedRole)
+                    if (userRoles[0] != editUser.UserType)
                     {
                         await UserManager.RemoveFromRoleAsync(user.Id, userRoles[0]);
                     }
@@ -237,7 +237,7 @@ namespace eStore.Controllers
                     Text = x.Name,
                     Value = x.Name
                 });
-            ViewBag.SelectedRole = rolesList;
+            ViewBag.UserType = rolesList;
             return View();
         }
 
@@ -269,6 +269,40 @@ namespace eStore.Controllers
             {
                 TempData["Status"] = 2;
                 TempData["Message"] = "حدث خطأ";
+            }
+            return RedirectToAction("Index");
+        }
+
+        public async Task<ActionResult> Delete(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var user = await UserManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(user);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteConfirmed(string id)
+        {
+            var user = await UserManager.FindByIdAsync(id);
+            try
+            {
+                await UserManager.DeleteAsync(user);
+                await context.SaveChangesAsync();
+                TempData["Status"] = 1;
+                TempData["Message"] = "تم حذف المستخدم " + user.UserName + " بنجاح.";
+            }
+            catch
+            {
+                TempData["Status"] = 2;
+                TempData["Message"] = "حدث خطأ أثناءء حذف هذا الحساب.";
             }
             return RedirectToAction("Index");
         }

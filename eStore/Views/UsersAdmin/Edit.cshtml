@@ -1,8 +1,7 @@
-﻿@model Audience.Models.ViewModels.EditUserViewModel
+﻿@model eStore.Models.EditUserViewModel
 
 @{
-    ViewBag.Title = "تعديل";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "تعديل بيانات مستخدم";
     var status = Convert.ToByte(TempData["Status"]);
 }
 
@@ -23,83 +22,48 @@
     }
 }
 
+<h2>@ViewBag.Title</h2>
+<hr />
+
 @using (Html.BeginForm("Edit", "UsersAdmin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary("", new { @class = "text-error" })
+    @Html.ValidationSummary("", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.Id)
 
-    <div class="panel panel-info">
-        <div class="panel-heading"><h3 class="panel-title">@ViewBag.Title</h3></div>
-        <div class="panel-body">
-            <div class="form-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.Email, new { @class = "col-md-3 control-label" })
-                            <div class="col-md-9">
-                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.UserName, new { @class = "col-md-3 control-label" })
-                            <div class="col-md-9">
-                                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.PersonName, new { @class = "col-md-3 control-label" })
-                            <div class="col-md-9">
-                                @Html.TextBoxFor(m => m.PersonName, new { @class = "form-control" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-md-3 control-label" })
-                            <div class="col-md-9">
-                                @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.InDeptId, "الإدارة", htmlAttributes: new { @class = "col-md-3 control-label" })
-                            <div class="col-md-9">
-                                @Html.DropDownList("InDeptId", null, "-- اختيار الإدارة --", htmlAttributes: new { @class = "form-control", required = true })
-                                @*@Html.ValidationMessageFor(model => model.InDeptId, "الإدارة حقل مطلوب", new { @class = "text-danger" })*@
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.SelectedRole, htmlAttributes: new { @class = "col-md-3 control-label" })
-                            <div class="col-md-9">
-                                <select class="form-control" name="SelectedRole">
-                                    @foreach (var item in (IEnumerable<SelectListItem>)ViewBag.SelectedRole)
-                                    {
-                                        <option value="@item.Value" selected="@item.Selected">@item.Text</option>
-                                    }
-                                </select>
-                                @Html.ValidationMessageFor(model => model.SelectedRole, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.Email, new { @class = "col-md-3 control-label" })
+                <div class="col-md-9">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
                 </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <button type="submit" class="btn btn-bluetik"><span class="glyphicon glyphicon-edit"></span> حفظ</button>
-                        <a href="@Url.Action("Index")" class="btn btn-pinktik"><span class="glyphicon glyphicon-arrow-right"></span> الرجوع إلى القائمة</a>
-                    </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(m => m.UserName, new { @class = "col-md-3 control-label" })
+                <div class="col-md-9">
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserType, htmlAttributes: new { @class = "col-md-3 control-label" })
+                <div class="col-md-9">
+                    @Html.DropDownListFor(m => m.UserType, (IEnumerable<SelectListItem>)ViewBag.AccountType, "اختيار الصلاحية", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.UserType, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
     </div>
-
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="submit" class="btn btn-primary"> حفظ</button>
+            <a href="@Url.Action("Index")" class="btn btn-secondary"> الرجوع إلى القائمة</a>
+        </div>
+    </div>
 }
 
 @section Scripts {

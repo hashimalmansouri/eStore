@@ -1,0 +1,48 @@
+﻿@model eStore.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "حذف مستخدم";
+}
+
+<h2>@ViewBag.Title</h2>
+<hr />
+<h3>هل تريد بالفعل حذف المستخدم - @Model.UserName ؟</h3>
+
+<table class="table table-bordered table-hover table-responsive-sm text-center">
+    <thead>
+        <tr>
+            <th class="text-center">
+                اسم المستخدم
+            </th>
+            <th class="text-center">
+                البريد الإلكتروني
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.UserType)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                @Html.DisplayFor(model => model.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.UserType)
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="حذف" class="btn btn-danger" /> |
+        @Html.ActionLink("العودة إلى القائمة", "Index", null, new { @class = "btn btn-secondary" })
+    </div>
+}

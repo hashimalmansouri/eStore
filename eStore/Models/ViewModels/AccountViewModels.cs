@@ -119,7 +119,7 @@ namespace eStore.Models
 
         [Required(ErrorMessage = "الصلاحية حقل مطلوب")]
         [Display(Name = "صلاحية الحساب")]
-        public string SelectedRole { get; set; }
+        public string UserType { get; set; }
     }
 
     public class ResetPasswordViewModel
