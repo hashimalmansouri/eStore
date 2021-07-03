@@ -234,6 +234,9 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\Images\a.jpg" />
+    <Content Include="Content\Images\b.jpg" />
+    <Content Include="Content\Images\c.jpg" />
     <Content Include="Content\Images\close.png" />
     <Content Include="Content\Images\loading.gif" />
     <Content Include="Content\Images\next.png" />
