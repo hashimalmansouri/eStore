@@ -1,0 +1,69 @@
+﻿@model IEnumerable<eStore.Models.ViewModels.PurchaseViewModel>
+
+@{
+    ViewBag.Title = "مشترياتي";
+    decimal total = 0;
+}
+
+<h2>@ViewBag.Title</h2>
+<h5>رصيدي @ViewBag.Balance$</h5>
+<hr />
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-info">
+        <h3>@TempData["Message"].ToString()</h3>
+    </div>
+}
+<table class="table table-bordered table-hover table-responsive d-sm-table text-center">
+    <tr>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.ProductName)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.UnitPrice)
+        </th>
+        <th class="text-center">الإجمالي</th>
+        <th class="text-center">الأوامر</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitPrice)
+            </td>
+            <td>
+                @{ total = item.UnitPrice * item.Quantity; }
+                @total
+            </td>
+            <td>
+                <div class="dropdown" dir="rtl">
+                    <button class="btn btn-danger btn-sm dropdown-toggle" type="button" id="dropdownMenuButtonSM" data-bs-toggle="dropdown">
+                        إرجاع
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonSM" style="">
+                        <li><h6 class="dropdown-header">خيارات الإرجاع</h6></li>
+                        <li><a class="dropdown-item" href="@Url.Action("Replace", new { id = item.ProductId })">إرجاع مع الاستبدال</a></li>
+                        <li><a class="dropdown-item" href="@Url.Action("Retrun", new { id = item.ProductId })">إرجاع بدون الاستبدال</a></li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+    }
+
+</table>

@@ -98,7 +98,8 @@ namespace eStore.Controllers
                         Email = userViewModel.Email,
                         UserType = userViewModel.UserType,
                         IsActive = true,
-                        EmailConfirmed = true
+                        EmailConfirmed = true,
+                        Balance = 100000
                     };
                     var adminresult = await UserManager.CreateAsync(user, userViewModel.Password);
 
@@ -130,7 +131,7 @@ namespace eStore.Controllers
                     TempData["Status"] = 1;
                     return RedirectToAction("Index");
                 }
-                catch (Exception ex)
+                catch 
                 {
                     TempData["Message"] = "حدث خطأ غير متوقع";
                     TempData["Status"] = 2;
@@ -221,7 +222,7 @@ namespace eStore.Controllers
                     TempData["Status"] = 1;
                     return RedirectToAction("Index");
                 }
-                catch (Exception ex)
+                catch 
                 {
                     TempData["Message"] = "حدث خطأ غير متوقع";
                     TempData["Status"] = 2;
@@ -264,7 +265,7 @@ namespace eStore.Controllers
                 await UserManager.UpdateAsync(user);
                 await context.SaveChangesAsync();
             }
-            catch (Exception ex)
+            catch 
             {
                 TempData["Status"] = 2;
                 TempData["Message"] = "حدث خطأ";

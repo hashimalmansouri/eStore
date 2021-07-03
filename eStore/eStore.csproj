@@ -180,6 +180,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductManagerController.cs" />
+    <Compile Include="Controllers\PurchaseController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
@@ -194,6 +195,10 @@
     <Compile Include="Migrations\202107021322258_CreateAttachments.Designer.cs">
       <DependentUpon>202107021322258_CreateAttachments.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202107021721220_AddProperties.cs" />
+    <Compile Include="Migrations\202107021721220_AddProperties.Designer.cs">
+      <DependentUpon>202107021721220_AddProperties.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Attachment.cs" />
     <Compile Include="Models\Brand.cs" />
@@ -206,6 +211,7 @@
     <Compile Include="Models\ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ViewModels\ManageViewModels.cs" />
+    <Compile Include="Models\ViewModels\PurchaseViewModel.cs" />
     <Compile Include="Models\ViewModels\ShoppingCartRemoveViewModel.cs" />
     <Compile Include="Models\ViewModels\ShoppingCartViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -228,9 +234,6 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
-    <Content Include="Content\Images\a.jpg" />
-    <Content Include="Content\Images\b.jpg" />
-    <Content Include="Content\Images\c.jpg" />
     <Content Include="Content\Images\close.png" />
     <Content Include="Content\Images\loading.gif" />
     <Content Include="Content\Images\next.png" />
@@ -345,6 +348,7 @@
     <Content Include="Views\Store\GenresMenu.cshtml" />
     <Content Include="Views\Store\Index.cshtml" />
     <Content Include="Views\Store\ProductDetails.cshtml" />
+    <Content Include="Views\Purchase\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -365,6 +369,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202107021322258_CreateAttachments.resx">
       <DependentUpon>202107021322258_CreateAttachments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107021721220_AddProperties.resx">
+      <DependentUpon>202107021721220_AddProperties.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

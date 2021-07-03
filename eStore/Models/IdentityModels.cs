@@ -16,6 +16,9 @@ namespace eStore.Models
         [Required(ErrorMessage = "{0} حقل مطلوب.")]
         [Display(Name = "صلاحية المستخدم")]
         public string UserType { get; set; }
+        [Required(ErrorMessage = "{0} حقل مطلوب.")]
+        [Display(Name = "الرصيد")]
+        public decimal Balance { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType

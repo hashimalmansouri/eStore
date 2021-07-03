@@ -33,6 +33,7 @@ namespace eStore
                 user.UserType = "Admin";
                 user.IsActive = true;
                 user.EmailConfirmed = true;
+                user.Balance = 100000;
                 var Check = userManager.Create(user, "Admin@123");
                 if (Check.Succeeded)
                 {

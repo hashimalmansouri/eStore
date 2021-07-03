@@ -10,7 +10,6 @@ namespace eStore.Controllers
     public class CheckoutController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
-        const string PromoCode = "FREE";
         //
         // GET: /Checkout/AddressAndPayment
         public ActionResult AddressAndPayment()
@@ -26,23 +25,16 @@ namespace eStore.Controllers
             TryUpdateModel(order);
             try
             {
-                if (string.Equals(values["PromoCode"], PromoCode,
-                        StringComparison.OrdinalIgnoreCase) == false)
-                {
-                    return View(order);
-                }
-                else
-                {
-                    order.Username = User.Identity.Name;
-                    order.OrderDate = DateTime.Now;
-                    //Save Order
-                    db.Orders.Add(order);
-                    db.SaveChanges();
-                    //Process the order
-                    var cart = ShoppingCart.GetCart(this.HttpContext);
-                    cart.CreateOrder(order);
-                    return RedirectToAction("Complete", new { id = order.OrderId });
-                }
+                var cart = ShoppingCart.GetCart(this.HttpContext);
+                order.Username = User.Identity.Name;
+                order.OrderDate = DateTime.Now;
+                order.Total = cart.GetOrderTotal(order);
+                //Save Order
+                db.Orders.Add(order);
+                db.SaveChanges();
+                //Process the order
+                cart.CreateOrder(order);
+                return RedirectToAction("Complete", new { id = order.OrderId });
             }
             catch
             {

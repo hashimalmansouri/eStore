@@ -41,3 +41,8 @@ body {
     max-height: 256px;
     cursor: pointer;
 }
+
+.form-check .form-check-input {
+    float: right;
+    margin-left: 10px;
+}

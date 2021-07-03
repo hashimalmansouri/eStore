@@ -127,7 +127,7 @@ namespace eStore.Models
                     Quantity = item.Count
                 };
                 // Set the order total of the shopping cart
-                orderTotal += (item.Count * item.Product.Price);
+                orderTotal += item.Count * item.Product.Price;
                 db.OrderDetails.Add(orderDetail);
 
 
@@ -146,6 +146,27 @@ namespace eStore.Models
             // Return the OrderId as the confirmation number
             return order.OrderId;
         }
+
+        public decimal GetOrderTotal(Order order)
+        {
+            decimal orderTotal = 0;
+            var cartItems = GetCartItems();
+            // Iterate over the items in the cart, adding the order details for each
+            foreach (var item in cartItems)
+            {
+                var orderDetail = new OrderDetail
+                {
+                    ProductId = item.ProductId,
+                    OrderId = order.OrderId,
+                    UnitPrice = item.Product.Price,
+                    Quantity = item.Count
+                };
+                // Set the order total of the shopping cart
+                orderTotal += item.Count * item.Product.Price;
+            }
+            return orderTotal;
+        }
+
         // We're using HttpContextBase to allow access to cookies.
         public string GetCartId(HttpContextBase context)
         {

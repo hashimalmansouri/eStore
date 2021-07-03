@@ -127,7 +127,8 @@ namespace eStore.Controllers
                     Email = model.Email, 
                     IsActive = true,
                     EmailConfirmed = true,
-                    UserType = "مستهلك"
+                    UserType = "مستهلك",
+                    Balance = 100000
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)

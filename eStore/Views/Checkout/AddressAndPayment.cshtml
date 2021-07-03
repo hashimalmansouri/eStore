@@ -80,13 +80,44 @@
         </div>
     </fieldset>
     <fieldset>
-        <legend>الدفع</legend>
-        <p>كل المنتجات مجانية عند إدخال الكوبون "FREE"</p>
+        <br />
+        <legend>طريقة الدفع</legend>
         <hr />
-        <div class="form-group">
-            @Html.Label("Promo Code", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBox("PromoCode","", new { @class = "form-control"})
+        <div class="my-3">
+            <div class="form-check">
+                <input id="credit" name="PaymentType" value="credit" type="radio" class="form-check-input" checked="" required="">
+                <label class="form-check-label" for="credit">بطاقة ائتمان</label>
+            </div>
+            <div class="form-check">
+                <input id="cash" name="PaymentType" value="cash" type="radio" class="form-check-input" required="">
+                <label class="form-check-label" for="cash">نقد</label>
+            </div>
+            <div class="form-check">
+                <input id="paypal" name="PaymentType" value="paypal" type="radio" class="form-check-input" required="">
+                <label class="form-check-label" for="paypal">PayPal</label>
+            </div>
+        </div>
+        <div class="row gy-3">
+            <div class="col-md-6">
+                <label for="cc-name" class="form-label">الاسم على البطاقة</label>
+                <input type="text" class="form-control" id="cc-name" placeholder="">
+                <small class="text-muted">الاسم الكامل كما هو معروض على البطاقة</small>
+            </div>
+
+            <div class="col-md-6">
+                <label for="cc-number" class="form-label">رقم البطاقة</label>
+                <input type="text" class="form-control" id="cc-number" placeholder="">
+                
+            </div>
+
+            <div class="col-md-3">
+                <label for="cc-expiration" class="form-label">تاريخ انتهاء الصلاحية</label>
+                <input type="text" class="form-control" id="cc-expiration" placeholder="">
+            </div>
+
+            <div class="col-md-3">
+                <label for="cc-cvv" class="form-label">الرمز الثلاثي (CVV)</label>
+                <input type="text" class="form-control" id="cc-cvv" placeholder="">
             </div>
         </div>
     </fieldset>
